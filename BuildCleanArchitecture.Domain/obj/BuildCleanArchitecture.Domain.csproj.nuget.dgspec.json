@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Do_an\\BuildCleanArchitecture\\BuildCleanArchitecture.Domain\\BuildCleanArchitecture.Domain.csproj": {}
+    "D:\\cv\\BuildCleanArchitecture\\BuildCleanArchitecture.Domain\\BuildCleanArchitecture.Domain.csproj": {}
   },
   "projects": {
-    "D:\\Do_an\\BuildCleanArchitecture\\BuildCleanArchitecture.Domain\\BuildCleanArchitecture.Domain.csproj": {
+    "D:\\cv\\BuildCleanArchitecture\\BuildCleanArchitecture.Domain\\BuildCleanArchitecture.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Do_an\\BuildCleanArchitecture\\BuildCleanArchitecture.Domain\\BuildCleanArchitecture.Domain.csproj",
+        "projectUniqueName": "D:\\cv\\BuildCleanArchitecture\\BuildCleanArchitecture.Domain\\BuildCleanArchitecture.Domain.csproj",
         "projectName": "BuildCleanArchitecture.Domain",
-        "projectPath": "D:\\Do_an\\BuildCleanArchitecture\\BuildCleanArchitecture.Domain\\BuildCleanArchitecture.Domain.csproj",
+        "projectPath": "D:\\cv\\BuildCleanArchitecture\\BuildCleanArchitecture.Domain\\BuildCleanArchitecture.Domain.csproj",
         "packagesPath": "C:\\Users\\adm\\.nuget\\packages\\",
-        "outputPath": "D:\\Do_an\\BuildCleanArchitecture\\BuildCleanArchitecture.Domain\\obj\\",
+        "outputPath": "D:\\cv\\BuildCleanArchitecture\\BuildCleanArchitecture.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\adm\\AppData\\Roaming\\NuGet\\NuGet.Config",

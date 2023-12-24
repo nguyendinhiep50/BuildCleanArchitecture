@@ -715,11 +715,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Do_an\\BuildCleanArchitecture\\BuildCleanArchitecture.Application\\BuildCleanArchitecture.Application.csproj",
+      "projectUniqueName": "D:\\cv\\BuildCleanArchitecture\\BuildCleanArchitecture.Application\\BuildCleanArchitecture.Application.csproj",
       "projectName": "BuildCleanArchitecture.Application",
-      "projectPath": "D:\\Do_an\\BuildCleanArchitecture\\BuildCleanArchitecture.Application\\BuildCleanArchitecture.Application.csproj",
+      "projectPath": "D:\\cv\\BuildCleanArchitecture\\BuildCleanArchitecture.Application\\BuildCleanArchitecture.Application.csproj",
       "packagesPath": "C:\\Users\\adm\\.nuget\\packages\\",
-      "outputPath": "D:\\Do_an\\BuildCleanArchitecture\\BuildCleanArchitecture.Application\\obj\\",
+      "outputPath": "D:\\cv\\BuildCleanArchitecture\\BuildCleanArchitecture.Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\adm\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -736,8 +736,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\Do_an\\BuildCleanArchitecture\\BuildCleanArchitecture.Domain\\BuildCleanArchitecture.Domain.csproj": {
-              "projectPath": "D:\\Do_an\\BuildCleanArchitecture\\BuildCleanArchitecture.Domain\\BuildCleanArchitecture.Domain.csproj"
+            "D:\\cv\\BuildCleanArchitecture\\BuildCleanArchitecture.Domain\\BuildCleanArchitecture.Domain.csproj": {
+              "projectPath": "D:\\cv\\BuildCleanArchitecture\\BuildCleanArchitecture.Domain\\BuildCleanArchitecture.Domain.csproj"
             }
           }
         }
