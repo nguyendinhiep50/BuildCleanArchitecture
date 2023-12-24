@@ -1,8 +1,2 @@
-node_modules/
-bin/
-obj/
-.vs/
-.DS_Store
-package-lock.json
-
-BuildCleanArchitecture.Application/bin/Debug/net7.0
+**/bin/
+**/obj/
