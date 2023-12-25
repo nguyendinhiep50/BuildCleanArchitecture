@@ -38,6 +38,8 @@ namespace BuildCleanArchitecture.Application.Books.Queries
                                         );
             }
 
+            query = query.Include(x => x.AuthorBooks);
+
             return await query.ToPagingAsync<Book, BookDto>(filter!, _mapper);
         }
     }

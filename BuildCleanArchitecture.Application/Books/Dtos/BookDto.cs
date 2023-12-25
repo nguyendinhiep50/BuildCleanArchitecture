@@ -50,9 +50,9 @@ namespace BuildCleanArchitecture.Application.Books.Dtos
                     return new BookDto
                     {
                         Name = entity.Name,
-                        AuthorBooks = dto.AuthorBooks,
-                        PublicationDate = dto.PublicationDate,
-                        UId = dto.UId,
+                        AuthorBooks = entity.AuthorBooks,
+                        PublicationDate = entity.PublicationDate,
+                        UId = entity.UId,
 
                         CreatedDate = entity.CreatedDate,
                         CreatedSpanTime = entity.CreatedSpanTime,

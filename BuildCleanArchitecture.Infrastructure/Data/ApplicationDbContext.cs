@@ -15,7 +15,7 @@ namespace BuildCleanArchitecture.Infrastructure.Data
         public DbSet<CatalogBook> CatalogBooks => Set<CatalogBook>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             base.OnModelCreating(modelBuilder);
 
