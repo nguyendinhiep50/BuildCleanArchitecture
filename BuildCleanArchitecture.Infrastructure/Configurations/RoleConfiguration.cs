@@ -9,6 +9,7 @@ namespace BuildCleanArchitecture.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<ApplicationRole> builder)
         {
+            builder.HasKey(x => x.Id);
             builder.HasData(
                 new ApplicationRole
                 {
