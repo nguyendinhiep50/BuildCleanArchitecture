@@ -3,3 +3,9 @@
 .vs/
 BuildCleanArchitecture.Infrastructure/obj/Debug/net7.0/refint/BuildCleanArchitecture.Infrastructure.dll
 BuildCleanArchitecture.Infrastructure/obj/Debug
+BuildCleanArchitecture.Application/obj
+*.dll
+*.cache
+BuildCleanArchitecture.Domain/obj/Debug
+BuildCleanArchitecture.Application/bin/Debug/
+BuildCleanArchitecture.Domain/bin/Debug/net7.0/
