@@ -1,3 +1,5 @@
 **/bin/
 **/obj/
 .vs/
+BuildCleanArchitecture.Infrastructure/obj/Debug/net7.0/refint/BuildCleanArchitecture.Infrastructure.dll
+BuildCleanArchitecture.Infrastructure/obj/Debug
