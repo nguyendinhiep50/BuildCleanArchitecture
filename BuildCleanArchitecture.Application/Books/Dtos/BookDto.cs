@@ -11,7 +11,7 @@ namespace BuildCleanArchitecture.Application.Books.Dtos
 
         public DateTime? PublicationDate { get; set; }
 
-        public virtual AuthorBook AuthorBooks { get; set; } = null!;
+        public virtual AuthorBook? AuthorBooks { get; set; } = null!;
     }
 
     public class BookAddDto : BookUpdateDto
@@ -49,7 +49,10 @@ namespace BuildCleanArchitecture.Application.Books.Dtos
                 {
                     return new BookDto
                     {
-                        
+                        Name = entity.Name,
+                        AuthorBooks = dto.AuthorBooks,
+                        PublicationDate = dto.PublicationDate,
+                        UId = dto.UId,
 
                         CreatedDate = entity.CreatedDate,
                         CreatedSpanTime = entity.CreatedSpanTime,

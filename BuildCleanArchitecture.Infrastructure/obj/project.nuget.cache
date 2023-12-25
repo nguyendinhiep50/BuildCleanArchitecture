@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "gxAm5KDEzVNgo8RtKl7uK3qtUg4575rS2WAzCyJ3XmEAr5bdKaWLj0rBcKIhb8I7VHXrPVjtntk239XqGOeI5w==",
+  "dgSpecHash": "Rxo4Lh5eTHGXWbL9XkssCAv8B4FIcv28/BaHXUwDCMr2dFXFRmBMrP2SzpR7Q+etuwKWYvtsLVuehBV1t2QdeA==",
   "success": true,
   "projectFilePath": "D:\\cv\\BuildCleanArchitecture\\BuildCleanArchitecture.Infrastructure\\BuildCleanArchitecture.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,8 @@
     "C:\\Users\\adm\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\adm\\.nuget\\packages\\fluentvalidation\\11.9.0\\fluentvalidation.11.9.0.nupkg.sha512",
+    "C:\\Users\\adm\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.9.0\\fluentvalidation.dependencyinjectionextensions.11.9.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\mediatr\\12.2.0\\mediatr.12.2.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",

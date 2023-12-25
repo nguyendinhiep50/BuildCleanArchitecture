@@ -34,47 +34,26 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
     {
         if (context == null) return;
 
-        //foreach (var entry in context.ChangeTracker.Entries<BaseAuditableEntity>())
-        //{
-        //    if (entry.State == EntityState.Added)
-        //    {
-        //        entry.Entity.CreatedBy = _user.Id;
-        //        entry.Entity.Created = DateTimeOffset.UtcNow;
-        //    }
-
-        //    if (entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.HasChangedOwnedEntities())
-        //    {
-        //        entry.Entity.LastModifiedBy = _user.Id;
-        //        entry.Entity.LastModified = DateTimeOffset.UtcNow;
-        //    }
-        //}
-
-        foreach (var entry in context.ChangeTracker.Entries<AuditableEntity>())
+        foreach (var entry in context.ChangeTracker.Entries<BaseEnitites>())
         {
             if (entry.State == EntityState.Added)
             {
-                entry.Entity.CreatedBy = _user.UserId;
+                entry.Entity.CreatedBy = _user.Id;
                 entry.Entity.CreatedDate = DateTime.Now.Date;
                 entry.Entity.CreatedSpanTime = DateTime.UtcNow.AddHours(7).ToString("HH:mm:ss");
+                entry.Entity.UId = entry.Entity.UId == Guid.Empty
+                                        ? Guid.NewGuid()
+                                        : entry.Entity.UId;
             }
 
             if (entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.HasChangedOwnedEntities())
             {
-                entry.Entity.UpdatedBy = _user.UserId;
+                entry.Entity.UpdatedBy = _user.Id;
                 entry.Entity.UpdatedDate = DateTime.Now.Date;
                 entry.Entity.UpdatedSpanTime = DateTime.UtcNow.AddHours(7).ToString("HH:mm:ss");
             }
         }
 
-        foreach (var entry in context.ChangeTracker.Entries<AuditableWithUIdEntity>())
-        {
-            if (entry.State == EntityState.Added)
-            {
-                entry.Entity.UId = entry.Entity.UId == Guid.Empty
-                                        ? Guid.NewGuid()
-                                        : entry.Entity.UId;
-            }
-        }
     }
 }
 

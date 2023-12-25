@@ -3,6 +3,7 @@ using BuildCleanArchitecture.Application.Common.Interfaces;
 using BuildCleanArchitecture.Domain.Entities;
 using BuildCleanArchitecture.Domain.Enities;
 using BuildCleanArchitecture.Infrastructure.Configurations;
+using System.Reflection;
 
 namespace BuildCleanArchitecture.Infrastructure.Data
 {
@@ -14,6 +15,8 @@ namespace BuildCleanArchitecture.Infrastructure.Data
         public DbSet<CatalogBook> CatalogBooks => Set<CatalogBook>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
