@@ -1,9 +1,11 @@
 ﻿using BuildCleanArchitecture.Domain.Enities;
+using System.ComponentModel.DataAnnotations;
 
 namespace BuildCleanArchitecture.Domain.Entities
 {
     public class Book : BaseEnitites
     {
+        [Required]
         public string? Name { get; set; }
 
         public DateTime? PublicationDate { get; set; }

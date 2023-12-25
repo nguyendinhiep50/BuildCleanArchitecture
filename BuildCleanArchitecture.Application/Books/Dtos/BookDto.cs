@@ -1,17 +1,22 @@
 ﻿using AutoMapper;
 using BuildCleanArchitecture.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BuildCleanArchitecture.Application.Books.Dtos
 {
     public class BookUpdateDto
     {
+        public string? Name { get; set; }
 
+        public DateTime? PublicationDate { get; set; }
+
+        public virtual AuthorBook AuthorBooks { get; set; } = null!;
     }
 
     public class BookAddDto : BookUpdateDto
     {
-
+        public string? Id { get; set; }
     }
 
     public class BookDto : BookUpdateDto
@@ -44,12 +49,8 @@ namespace BuildCleanArchitecture.Application.Books.Dtos
                 {
                     return new BookDto
                     {
-                        Id = entity.BookCode?.Trim() ?? string.Empty,
-                        BookName = entity.BookName?.Trim(),
-                        AccountContribute = entity.AccountContribute?.Trim(),
-                        Group02 = entity.Group02?.Trim(),
-                        Group01 = entity.Group01?.Trim(),
-                        SurplusGapType = entity.SurplusGapType,
+                        
+
                         CreatedDate = entity.CreatedDate,
                         CreatedSpanTime = entity.CreatedSpanTime,
                         CreatedBy = entity.CreatedBy,

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using BuildCleanArchitecture.Application.Books.Dtos;
+using BuildCleanArchitecture.Application.Books.Queries;
 using BuildCleanArchitecture.Application.Common.Interfaces;
 using BuildCleanArchitecture.Application.Common.Models;
+using BuildCleanArchitecture.Domain.Entities;
 using MediatR;
 
 namespace BuildCleanArchitecture.Application.Books.Commands
@@ -28,7 +30,29 @@ namespace BuildCleanArchitecture.Application.Books.Commands
 
         public async Task<ResponseModel<bool>> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
-            return null;
+            var book = _mapper.Map<Book>(request.Dto!);
+
+            var existedAccount0Code = await _mediator.Send(new CheckBookCodeExistedQuery
+            {
+                Id = book.Id!
+            });
+
+            if (existedAccount0Code)
+            {
+                return new ResponseModel<bool>
+                {
+                    IsSuccess = false,
+                    Message = $"Sách này với mã {book.Id} đã tồn tại"
+                };
+            }
+
+            await _context.Books.AddAsync(book);
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return new ResponseModel<bool>
+            {
+                IsSuccess = true
+            };
         }
     }
 }

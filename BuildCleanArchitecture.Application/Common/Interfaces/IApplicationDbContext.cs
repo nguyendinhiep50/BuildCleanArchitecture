@@ -9,5 +9,7 @@ namespace BuildCleanArchitecture.Application.Common.Interfaces
         DbSet<AuthorBook> Authors {get;}
         DbSet<Book> Books { get; }
         DbSet<CatalogBook> CatalogBooks { get; }
+
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

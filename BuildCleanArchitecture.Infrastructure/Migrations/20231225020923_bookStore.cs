@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BuildCleanArchitecture.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialBookDb : Migration
+    public partial class bookStore : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -63,53 +63,20 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedSpanTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedBy = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedSpanTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UpdatedBy = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
                     UId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Authors", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Books",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedSpanTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedBy = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedSpanTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedBy = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    UId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Books", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CatalogBooks",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedSpanTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedBy = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedSpanTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedBy = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    UId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CatalogBooks", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -136,6 +103,60 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Books",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PublicationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    AuthorBooksId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedSpanTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedBy = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedSpanTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedBy = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    UId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Books", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Books_Authors_AuthorBooksId",
+                        column: x => x.AuthorBooksId,
+                        principalTable: "Authors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatalogBooks",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BookId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedSpanTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedBy = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedSpanTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedBy = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    UId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatalogBooks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CatalogBooks_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "ApplicationRole",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
@@ -150,8 +171,8 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedBy", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UpdatedBy", "UpdatedDate", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"), 0, "d26fcaf1-e428-4df5-a663-69e8cc8571b6", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin@localhost.com", true, false, null, "System", "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEA8BeBy0UaAop3A07DdKUByJk8VpOTbrF2kKz3LhAf4TCHEeb9G6QfGVwcJtiF94mg==", null, false, null, true, false, null, null, "admin@localhost.com" },
-                    { new Guid("9e224968-33e4-4652-b7b7-8574d048cdb9"), 0, "78ccd812-114c-41d3-b2cc-a36f6344fc89", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "user@localhost.com", true, false, null, "User", "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "AQAAAAIAAYagAAAAEJwhLK3x7LstnBvZyagKk9JWsgbXfCnYWV3ZjvUOcorVwY1yr0mvDAbec4tbwYevcQ==", null, false, null, true, false, null, null, "user@localhost.com" }
+                    { new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"), 0, "76810814-98df-4cd9-95b5-f51f1650ed5f", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin@localhost.com", true, false, null, "System", "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEDSC/GveuzPQAZEuEOjKKdxLa2KSNOwd+UwnqjCCAwcpDs35ms1lc9PZc92e9rfDMQ==", null, false, null, true, false, null, null, "admin@localhost.com" },
+                    { new Guid("9e224968-33e4-4652-b7b7-8574d048cdb9"), 0, "204fb1d6-0309-4773-a4f0-d9efe4d6e57a", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "user@localhost.com", true, false, null, "User", "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "AQAAAAIAAYagAAAAEC81bj0D7OZ1jWy4nzlkbTf/wTFAhnXeSZ39pyRQHBTHCfhGQA5NiEPXgjS1uxVYHg==", null, false, null, true, false, null, null, "user@localhost.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -167,6 +188,16 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                 name: "IX_ApplicationUserRole_UserId",
                 table: "ApplicationUserRole",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_AuthorBooksId",
+                table: "Books",
+                column: "AuthorBooksId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CatalogBooks_BookId",
+                table: "CatalogBooks",
+                column: "BookId");
         }
 
         /// <inheritdoc />
@@ -176,12 +207,6 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                 name: "ApplicationUserRole");
 
             migrationBuilder.DropTable(
-                name: "Authors");
-
-            migrationBuilder.DropTable(
-                name: "Books");
-
-            migrationBuilder.DropTable(
                 name: "CatalogBooks");
 
             migrationBuilder.DropTable(
@@ -189,6 +214,12 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "ApplicationUser");
+
+            migrationBuilder.DropTable(
+                name: "Books");
+
+            migrationBuilder.DropTable(
+                name: "Authors");
         }
     }
 }

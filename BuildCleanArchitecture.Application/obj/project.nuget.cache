@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "RB/bcywGM84aW4E7w67LOB/kqiVu+0A9EgSUhdb21dLa6hWSRSsKZTQGJJsHxTybaoNxaWFP3Atxiq8XhufleA==",
+  "dgSpecHash": "l4BvR4h5Cd/c/8axXG/4ymnUOC7oJMKfw+j7WDPxJWR0Zg3uVs6F4QXlqn+MoXAh4mMcFo7TlpzvPkW28RJ+BQ==",
   "success": true,
   "projectFilePath": "D:\\cv\\BuildCleanArchitecture\\BuildCleanArchitecture.Application\\BuildCleanArchitecture.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\adm\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\adm\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\mediatr\\12.2.0\\mediatr.12.2.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

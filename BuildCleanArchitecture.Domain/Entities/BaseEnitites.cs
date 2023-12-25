@@ -1,4 +1,6 @@
-﻿namespace BuildCleanArchitecture.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BuildCleanArchitecture.Domain.Entities
 {
     public class BaseEnitites
     {

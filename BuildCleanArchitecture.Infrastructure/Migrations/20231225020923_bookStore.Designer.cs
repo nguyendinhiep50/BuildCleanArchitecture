@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuildCleanArchitecture.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231221153618_InitialBookDb")]
-    partial class InitialBookDb
+    [Migration("20231225020923_bookStore")]
+    partial class bookStore
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,6 +30,9 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("BookId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<decimal?>("CreatedBy")
                         .HasColumnType("decimal(18,2)");
 
@@ -38,6 +41,12 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
 
                     b.Property<string>("CreatedSpanTime")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("UId")
                         .HasColumnType("uniqueidentifier");
@@ -52,6 +61,8 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookId");
 
                     b.ToTable("CatalogBooks");
                 });
@@ -69,6 +80,16 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
 
                     b.Property<string>("CreatedSpanTime")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("UId")
                         .HasColumnType("uniqueidentifier");
@@ -92,6 +113,10 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("AuthorBooksId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<decimal?>("CreatedBy")
                         .HasColumnType("decimal(18,2)");
 
@@ -100,6 +125,16 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
 
                     b.Property<string>("CreatedSpanTime")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("PublicationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("UId")
                         .HasColumnType("uniqueidentifier");
@@ -114,6 +149,8 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorBooksId");
 
                     b.ToTable("Books");
                 });
@@ -228,7 +265,7 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                         {
                             Id = new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d26fcaf1-e428-4df5-a663-69e8cc8571b6",
+                            ConcurrencyStamp = "76810814-98df-4cd9-95b5-f51f1650ed5f",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
@@ -236,7 +273,7 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                             Name = "System",
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEA8BeBy0UaAop3A07DdKUByJk8VpOTbrF2kKz3LhAf4TCHEeb9G6QfGVwcJtiF94mg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDSC/GveuzPQAZEuEOjKKdxLa2KSNOwd+UwnqjCCAwcpDs35ms1lc9PZc92e9rfDMQ==",
                             PhoneNumberConfirmed = false,
                             Status = true,
                             TwoFactorEnabled = false,
@@ -246,7 +283,7 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                         {
                             Id = new Guid("9e224968-33e4-4652-b7b7-8574d048cdb9"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "78ccd812-114c-41d3-b2cc-a36f6344fc89",
+                            ConcurrencyStamp = "204fb1d6-0309-4773-a4f0-d9efe4d6e57a",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "user@localhost.com",
                             EmailConfirmed = true,
@@ -254,7 +291,7 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                             Name = "User",
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJwhLK3x7LstnBvZyagKk9JWsgbXfCnYWV3ZjvUOcorVwY1yr0mvDAbec4tbwYevcQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEC81bj0D7OZ1jWy4nzlkbTf/wTFAhnXeSZ39pyRQHBTHCfhGQA5NiEPXgjS1uxVYHg==",
                             PhoneNumberConfirmed = false,
                             Status = true,
                             TwoFactorEnabled = false,
@@ -289,6 +326,24 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("BuildCleanArchitecture.Domain.Enities.CatalogBook", b =>
+                {
+                    b.HasOne("BuildCleanArchitecture.Domain.Entities.Book", null)
+                        .WithMany("CatalogBooks")
+                        .HasForeignKey("BookId");
+                });
+
+            modelBuilder.Entity("BuildCleanArchitecture.Domain.Entities.Book", b =>
+                {
+                    b.HasOne("BuildCleanArchitecture.Domain.Entities.AuthorBook", "AuthorBooks")
+                        .WithMany()
+                        .HasForeignKey("AuthorBooksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AuthorBooks");
+                });
+
             modelBuilder.Entity("BuildCleanArchitecture.Infrastructure.Identity.ApplicationUserRole", b =>
                 {
                     b.HasOne("BuildCleanArchitecture.Infrastructure.Identity.ApplicationRole", "Role")
@@ -306,6 +361,11 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BuildCleanArchitecture.Domain.Entities.Book", b =>
+                {
+                    b.Navigation("CatalogBooks");
                 });
 
             modelBuilder.Entity("BuildCleanArchitecture.Infrastructure.Identity.ApplicationRole", b =>

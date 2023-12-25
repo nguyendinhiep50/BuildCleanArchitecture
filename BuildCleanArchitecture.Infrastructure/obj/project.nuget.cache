@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "aEbSmnqXr979K5wPm3WaLvDYQ6YQ1/dfyUOZR818ljnU0yJ3QCp47PaXbavOsAsRgh2w8MQb6q+hhBmyqAk7NA==",
+  "dgSpecHash": "gxAm5KDEzVNgo8RtKl7uK3qtUg4575rS2WAzCyJ3XmEAr5bdKaWLj0rBcKIhb8I7VHXrPVjtntk239XqGOeI5w==",
   "success": true,
   "projectFilePath": "D:\\cv\\BuildCleanArchitecture\\BuildCleanArchitecture.Infrastructure\\BuildCleanArchitecture.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\adm\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\adm\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\adm\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
