@@ -1,0 +1,9 @@
+﻿BuildCleanArchitecture.Application/bin
+BuildCleanArchitecture.Application/obj
+BuildCleanArchitecture.Domain/obj/
+BuildCleanArchitecture.Infrastructure/bin
+BuildCleanArchitecture/bin
+BuildCleanArchitecture/obj
+BuildCleanArchitecture.Infrastructure/obj
+BuildCleanArchitecture.Domain/bin
+.vs

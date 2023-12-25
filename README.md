@@ -1,52 +1,17 @@
-# BuildCleanArchitecture
+# Clean Architecture
 
-_.swp
-_._~
-project.lock.json
-.DS_Store
-_.pyc
-nupkg/
+## Getting Started
 
-# Visual Studio Code
+## Database
 
-.vscode/
+## Technologies
 
-# Rider
+- [ASP.NET Core 7](https://docs.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core)
+- [Entity Framework Core 7](https://docs.microsoft.com/en-us/ef/core/)
+- [MediatR](https://github.com/jbogard/MediatR)
+- [AutoMapper](https://automapper.org/)
+- [FluentValidation](https://fluentvalidation.net/)
 
-.idea/
+## Reference source
 
-# Visual Studio
-
-.vs/
-
-# Fleet
-
-.fleet/
-
-# Code Rush
-
-.cr/
-
-# User-specific files
-
-_.suo
-_.user
-_.userosscache
-_.sln.docstates
-
-# Build results
-
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-build/
-bld/
-[Bb]in/
-[Oo]bj/
-[Oo]ut/
-msbuild.log
-msbuild.err
-msbuild.wrn
+-[GitHub](https://github.com/jasontaylordev/CleanArchitecture)
