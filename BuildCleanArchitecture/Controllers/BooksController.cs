@@ -2,7 +2,7 @@
 using BuildCleanArchitecture.Application.Books.Dtos;
 using BuildCleanArchitecture.Application.Books.Queries;
 using BuildCleanArchitecture.Application.Common.Models;
-using BuildCleanArchitecture.Application.Common.Security;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuildCleanArchitecture.Controllers

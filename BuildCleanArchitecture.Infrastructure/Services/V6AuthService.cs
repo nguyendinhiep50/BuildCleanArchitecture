@@ -1,13 +1,12 @@
 ﻿using BuildCleanArchitecture.Application.Common.Interfaces;
 using BuildCleanArchitecture.Application.Identities.Dtos;
-using BuildCleanArchitecture.Application.Utilities;
-using BuildCleanArchitecture.Domain.Entities;
+using System.IdentityModel.Tokens.Jwt;
 using BuildCleanArchitecture.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
+using System.Data;
 using System.Security.Claims;
 using System.Text;
 
@@ -61,25 +60,33 @@ namespace BuildCleanArchitecture.Infrastructure.Services
 
             string GetToken(ApplicationUser _user)
             {
-                if (_user == null)
+                JwtSecurityToken token;
+
+                var authClaims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, _user.UserName),
+                        new Claim(JwtRegisteredClaimNames.Jti, _user.Id.ToString())
+                    };
+
+                if (_user.UserRoles != null)
                 {
-                    return null!;
+                    foreach (var role in user.UserRoles)
+                    {
+                        authClaims.Add(new Claim(ClaimTypes.Role, role.Role.Name!));
+                    }
                 }
 
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("SecrectKey")!);
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(new Claim[]
-                    {
-                        new Claim(ClaimTypes.NameIdentifier, _user.UserName !),
-                        new Claim(ClaimTypes.Sid, _user.Id.ToString())
+                var authenKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
 
-                    }),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-                };
+                token = new JwtSecurityToken(
+                    issuer: _configuration["Jwt:Issuer"],
+                    audience: _configuration["Jwt:Audience"],
+                    expires: DateTime.Now.AddMonths(1),
+                    claims: authClaims,
+                    signingCredentials: new SigningCredentials(authenKey, SecurityAlgorithms.HmacSha512Signature)
+                );
+                return new JwtSecurityTokenHandler().WriteToken(token);
 
-                return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
             }
         }
 

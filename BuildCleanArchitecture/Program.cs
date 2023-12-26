@@ -1,12 +1,15 @@
-using BuildCleanArchitecture;
+﻿using BuildCleanArchitecture;
 using BuildCleanArchitecture.Application;
 using BuildCleanArchitecture.Infrastructure;
 using BuildCleanArchitecture.Infrastructure.Data;
 using BuildCleanArchitecture.Infrastructure.Identity;
 using BuildCleanArchitecture.Middlewares;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,67 +37,109 @@ services.AddHttpContextAccessor();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 //builder.Services.AddEndpointsApiExplorer();
 
-services.AddSwaggerGen(options =>
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
 {
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
-                      Enter 'Bearer' [space] and then your token in the text input below.
-                      \r\n\r\nExample: 'Bearer 12345abcdef'",
-        Name = "Authorization",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer"
-    });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });
 
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+    // Đây là cấu hình để Swagger không yêu cầu xác thực
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
+        Description = "JWT Authorization header using the Bearer scheme.",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
         {
-            new OpenApiSecurityScheme
             {
-            Reference = new OpenApiReference
+                new OpenApiSecurityScheme
                 {
-                Type = ReferenceType.SecurityScheme,
-                Id = "Bearer"
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
                 },
-                Scheme = "oauth2",
-                Name = "Bearer",
-                In = ParameterLocation.Header,
-
-            },
-            new List<string>()
-        }
-    });
-
-    options.CustomOperationIds(d => d.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor ? $"{controllerActionDescriptor.ControllerName}{controllerActionDescriptor.MethodInfo.Name}" : d.ActionDescriptor.AttributeRouteInfo?.Name);
+                Array.Empty<string>()
+            }
+        });
 });
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
-    // Password settings.
-    options.Password.RequireDigit = true;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireNonAlphanumeric = true;
-    options.Password.RequireUppercase = true;
-    options.Password.RequiredLength = 6;
-    options.Password.RequiredUniqueChars = 1;
+    // Thiết lập về Password
+    options.Password.RequireDigit = false; // Không bắt phải có số
+    options.Password.RequireLowercase = false; // Không bắt phải có chữ thường
+    options.Password.RequireNonAlphanumeric = false; // Không bắt ký tự đặc biệt
+    options.Password.RequireUppercase = false; // Không bắt buộc chữ in
+    options.Password.RequiredLength = 3; // Số ký tự tối thiểu của password
+    options.Password.RequiredUniqueChars = 1; // Số ký tự riêng biệt 
 
-    // Lockout settings.
-    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-    options.Lockout.MaxFailedAccessAttempts = 5;
+    // Cấu hình Lockout - khóa user
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5); // Khóa 5 phút
+    options.Lockout.MaxFailedAccessAttempts = 5; // Thất bại 5 lầ thì khóa
     options.Lockout.AllowedForNewUsers = true;
 
-    // User settings.
-    options.User.AllowedUserNameCharacters =
-    "123";
-    options.User.RequireUniqueEmail = false;
+    // Cấu hình về User.
+    options.User.AllowedUserNameCharacters = // các ký tự đặt tên user
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+    options.User.RequireUniqueEmail = true; // Email là duy nhất
+
+    // Cấu hình đăng nhập.
+    options.SignIn.RequireConfirmedEmail = true; // Cấu hình xác thực địa chỉ email (email phải tồn tại)
+    options.SignIn.RequireConfirmedPhoneNumber = false; // Xác thực số điện thoại
+
 });
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("nguyendinhiep_key_longdaithonglong"));
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = "your-issuer",
+            ValidAudience = "your-audience",
+            IssuerSigningKey = key
+        };
+    });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy =>
+    {
+        policy.RequireRole("Management");
+        policy.RequireRole("Teacher");
+        policy.RequireRole("Student");
+    });
+});
+
 
 var app = builder.Build();
+
+app.UseCors("AllowMyOrigin");
+
+if (!app.Environment.IsDevelopment())
+{
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+app.UseHealthChecks("/health");
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
 
 // Configure the HTTP request pipeline.
 app.UseAuthentication();
@@ -102,14 +147,13 @@ app.UseAuthorization();
 
 app.UseUserAuthorization();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
-app.MapControllers();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller}/{action=Index}/{id?}");
 
 app.Run();
