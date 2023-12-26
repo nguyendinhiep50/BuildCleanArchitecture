@@ -1,7 +1,10 @@
 using BuildCleanArchitecture;
 using BuildCleanArchitecture.Application;
 using BuildCleanArchitecture.Infrastructure;
+using BuildCleanArchitecture.Infrastructure.Data;
+using BuildCleanArchitecture.Infrastructure.Identity;
 using BuildCleanArchitecture.Middlewares;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.OpenApi.Models;
 
@@ -65,6 +68,10 @@ services.AddSwaggerGen(options =>
 
     options.CustomOperationIds(d => d.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor ? $"{controllerActionDescriptor.ControllerName}{controllerActionDescriptor.MethodInfo.Name}" : d.ActionDescriptor.AttributeRouteInfo?.Name);
 });
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 var app = builder.Build();
 

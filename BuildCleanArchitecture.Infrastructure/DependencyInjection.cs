@@ -1,6 +1,7 @@
 ﻿using BuildCleanArchitecture.Application.Common.Interfaces;
 using BuildCleanArchitecture.Infrastructure.Data;
 using BuildCleanArchitecture.Infrastructure.Data.Interceptors;
+using BuildCleanArchitecture.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -49,6 +50,7 @@ namespace BuildCleanArchitecture.Infrastructure
                     IssuerSigningKey = new SymmetricSecurityKey(key)
                 };
             });
+            services.AddTransient<IAuthService, V6AuthService>();
 
             services.AddMemoryCache();
 

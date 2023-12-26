@@ -13,7 +13,6 @@ namespace BuildCleanArchitecture.Infrastructure.Data
         public DbSet<AuthorBook> Authors => Set<AuthorBook>();
         public DbSet<Book> Books => Set<Book>();
         public DbSet<CatalogBook> CatalogBooks => Set<CatalogBook>();
-        public DbSet<User> Users => Set<User>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

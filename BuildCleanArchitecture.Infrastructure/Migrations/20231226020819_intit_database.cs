@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BuildCleanArchitecture.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class intit_database : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -77,6 +77,19 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Authors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -171,8 +184,8 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedBy", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UpdatedBy", "UpdatedDate", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"), 0, "0c863a41-d13e-40da-b1e3-43ff797fd8c4", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin@localhost.com", true, false, null, "System", "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEFfGJKwFFndG9Nh4v9l1IRo4TgGJbHbZLB1OhMAeloQrS18hLFez8TBFekZhtKQPXw==", null, false, null, true, false, null, null, "admin@localhost.com" },
-                    { new Guid("9e224968-33e4-4652-b7b7-8574d048cdb9"), 0, "931befe9-115c-4ce5-b028-e8ba04419988", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "user@localhost.com", true, false, null, "User", "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "AQAAAAIAAYagAAAAEHvWKeGX9sVA3XfQ29cJASokcdzoJy9AVCcMnfbDwyIwsAg7wq5kVChv55L6CmtiRw==", null, false, null, true, false, null, null, "user@localhost.com" }
+                    { new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"), 0, "1ccf8290-4c4a-42be-ae4c-54af38eeb5cb", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin@localhost.com", true, false, null, "System", "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEF+Z3/XSPot5hffCPXavbZJ5uPTWZWXwm7rGwIXAm4jsDOaQ3WPf206dwnZLHjpnlA==", null, false, null, true, false, null, null, "admin@localhost.com" },
+                    { new Guid("9e224968-33e4-4652-b7b7-8574d048cdb9"), 0, "1f25a6f2-7649-4541-9cad-1bc870bcba31", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "user@localhost.com", true, false, null, "User", "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "AQAAAAIAAYagAAAAEO5Z8GG1JVpvv9lx8vAF2iWpofzO2R/wRqZ5hRirnSfkZQNVsI9xKalQqBvsCvmQUQ==", null, false, null, true, false, null, null, "user@localhost.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -208,6 +221,9 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "CatalogBooks");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "ApplicationRole");

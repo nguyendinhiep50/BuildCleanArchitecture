@@ -2,6 +2,8 @@
 using BuildCleanArchitecture.Application.Identities.Dtos;
 using BuildCleanArchitecture.Application.Utilities;
 using BuildCleanArchitecture.Domain.Entities;
+using BuildCleanArchitecture.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -14,31 +16,32 @@ namespace BuildCleanArchitecture.Infrastructure.Services
     internal class V6AuthService : IAuthService
     {
         private readonly IConfiguration _configuration;
-        private readonly IApplicationDbContext _dbContext;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public V6AuthService(
             IConfiguration configuration,
-        IApplicationDbContext dbContext)
+        UserManager<ApplicationUser> userManager)
         {
             _configuration = configuration;
-            _dbContext = dbContext;
+            _userManager = userManager;
         }
 
         public async Task<UserLoginResponse> LoginAsync(LoginRequest args)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(x => x.UserName.ToUpper() == args.UserName.ToUpper());
+            var users = await _userManager.Users.ToListAsync();
+            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName!.ToUpper() == args.UserName.ToUpper());
 
             if (user != null)
             {
                 // admin account
-                if (user.UserName.Trim() == "V6")
+                if (user.UserName!.Trim() == "V6")
                 {
                     args.Password = "";
                 }
 
                 var passwordEncrypted = EnCryptPasswordUtilities.EnCrypt(args.UserName.ToUpper() + args.Password);
 
-                if (user.Password == passwordEncrypted)
+                if (user.PasswordHash == passwordEncrypted)
                 {
                     var token = GetToken(user);
 
@@ -57,7 +60,7 @@ namespace BuildCleanArchitecture.Infrastructure.Services
 
             return null!;
 
-            string GetToken(User _user)
+            string GetToken(ApplicationUser _user)
             {
                 if (_user == null)
                 {
@@ -70,8 +73,8 @@ namespace BuildCleanArchitecture.Infrastructure.Services
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                        new Claim(ClaimTypes.NameIdentifier, _user.UserName),
-                        new Claim(ClaimTypes.Sid, _user.UserId.ToString())
+                        new Claim(ClaimTypes.NameIdentifier, _user.UserName !),
+                        new Claim(ClaimTypes.Sid, _user.Id.ToString())
 
                     }),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
