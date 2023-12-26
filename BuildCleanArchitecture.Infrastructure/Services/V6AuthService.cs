@@ -28,7 +28,6 @@ namespace BuildCleanArchitecture.Infrastructure.Services
 
         public async Task<UserLoginResponse> LoginAsync(LoginRequest args)
         {
-            var users = await _userManager.Users.ToListAsync();
             var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName!.ToUpper() == args.UserName.ToUpper());
 
             if (user != null)
@@ -39,9 +38,9 @@ namespace BuildCleanArchitecture.Infrastructure.Services
                     args.Password = "";
                 }
 
-                var passwordEncrypted = EnCryptPasswordUtilities.EnCrypt(args.UserName.ToUpper() + args.Password);
+                var checkPassword = await _userManager.CheckPasswordAsync(user, args.Password);
 
-                if (user.PasswordHash == passwordEncrypted)
+                if (checkPassword)
                 {
                     var token = GetToken(user);
 

@@ -80,19 +80,6 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ApplicationUserRole",
                 columns: table => new
                 {
@@ -184,8 +171,8 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedBy", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UpdatedBy", "UpdatedDate", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"), 0, "1ccf8290-4c4a-42be-ae4c-54af38eeb5cb", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin@localhost.com", true, false, null, "System", "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEF+Z3/XSPot5hffCPXavbZJ5uPTWZWXwm7rGwIXAm4jsDOaQ3WPf206dwnZLHjpnlA==", null, false, null, true, false, null, null, "admin@localhost.com" },
-                    { new Guid("9e224968-33e4-4652-b7b7-8574d048cdb9"), 0, "1f25a6f2-7649-4541-9cad-1bc870bcba31", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "user@localhost.com", true, false, null, "User", "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "AQAAAAIAAYagAAAAEO5Z8GG1JVpvv9lx8vAF2iWpofzO2R/wRqZ5hRirnSfkZQNVsI9xKalQqBvsCvmQUQ==", null, false, null, true, false, null, null, "user@localhost.com" }
+                    { new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"), 0, "6f445237-91c2-41dd-8fef-2d5c59ccc5b4", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin@localhost.com", true, false, null, "System", "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAED9RGetj8ZfBz/gDDZ/nWbPWiKDKi5wE+ScsobPe7PciQjuDYcKMdZX7fFfSiCLIyg==", null, false, null, true, false, null, null, "admin@localhost.com" },
+                    { new Guid("9e224968-33e4-4652-b7b7-8574d048cdb9"), 0, "5f3f8966-52e6-4817-93a0-c2ebffa49af2", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "user@localhost.com", true, false, null, "User", "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "AQAAAAIAAYagAAAAEIhKpSKxC0HMrvmGsyTrpeVSNsYAyKFb2mnSwKbY1SyuoflRiVqgkXdJCC91ZN5QLg==", null, false, null, true, false, null, null, "user@localhost.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -221,9 +208,6 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "CatalogBooks");
-
-            migrationBuilder.DropTable(
-                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "ApplicationRole");

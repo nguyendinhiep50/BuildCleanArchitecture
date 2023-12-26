@@ -150,24 +150,6 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("BuildCleanArchitecture.Domain.Entities.User", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("BuildCleanArchitecture.Infrastructure.Identity.ApplicationRole", b =>
                 {
                     b.Property<Guid>("Id")
@@ -278,7 +260,7 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                         {
                             Id = new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1ccf8290-4c4a-42be-ae4c-54af38eeb5cb",
+                            ConcurrencyStamp = "6f445237-91c2-41dd-8fef-2d5c59ccc5b4",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
@@ -286,7 +268,7 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                             Name = "System",
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEF+Z3/XSPot5hffCPXavbZJ5uPTWZWXwm7rGwIXAm4jsDOaQ3WPf206dwnZLHjpnlA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED9RGetj8ZfBz/gDDZ/nWbPWiKDKi5wE+ScsobPe7PciQjuDYcKMdZX7fFfSiCLIyg==",
                             PhoneNumberConfirmed = false,
                             Status = true,
                             TwoFactorEnabled = false,
@@ -296,7 +278,7 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                         {
                             Id = new Guid("9e224968-33e4-4652-b7b7-8574d048cdb9"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1f25a6f2-7649-4541-9cad-1bc870bcba31",
+                            ConcurrencyStamp = "5f3f8966-52e6-4817-93a0-c2ebffa49af2",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "user@localhost.com",
                             EmailConfirmed = true,
@@ -304,7 +286,7 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                             Name = "User",
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEO5Z8GG1JVpvv9lx8vAF2iWpofzO2R/wRqZ5hRirnSfkZQNVsI9xKalQqBvsCvmQUQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIhKpSKxC0HMrvmGsyTrpeVSNsYAyKFb2mnSwKbY1SyuoflRiVqgkXdJCC91ZN5QLg==",
                             PhoneNumberConfirmed = false,
                             Status = true,
                             TwoFactorEnabled = false,
