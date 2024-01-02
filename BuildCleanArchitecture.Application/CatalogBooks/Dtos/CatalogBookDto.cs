@@ -2,26 +2,28 @@
 using BuildCleanArchitecture.Domain.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BuildCleanArchitecture.Application.Books.Dtos
+namespace BuildCleanArchitecture.Application.CatalogBooks.Dtos
 {
-    public class BookUpdateDto
+    public class CatalogBookUpdateDto
     {
         public string? Name { get; set; }
 
         public DateTime? PublicationDate { get; set; }
 
-        public virtual AuthorBook? AuthorBooks { get; set; } = null!;
     }
 
-    public class BookAddDto : BookUpdateDto
+    public class CatalogBookAddDto : CatalogBookUpdateDto
     {
         public string? Id { get; set; }
     }
 
-    public class BookDto : BookUpdateDto
+    public class CatalogBookDto : CatalogBookUpdateDto
     {
         [Column("UID")]
         public Guid UId { get; set; }
+
+        [Column("UID")]
+        public Book? Books { get; set; }
 
         [Column("date0")]
         public DateTime? CreatedDate { get; set; }
@@ -40,17 +42,15 @@ namespace BuildCleanArchitecture.Application.Books.Dtos
 
         [Column("user_id2")]
         public decimal? UpdatedBy { get; set; }
-        private class BookProfile : Profile
+        private class CatalogBookProfile : Profile
         {
-            public BookProfile()
+            public CatalogBookProfile()
             {
-                CreateMap<Book, BookDto>().ConvertUsing((entity, dto) =>
+                CreateMap<CatalogBook, CatalogBookDto>().ConvertUsing((entity, dto) =>
                 {
-                    return new BookDto
+                    return new CatalogBookDto
                     {
                         Name = entity.Name,
-                        AuthorBooks = entity.AuthorBooks,
-                        PublicationDate = entity.PublicationDate,
                         UId = entity.UId,
 
                         CreatedDate = entity.CreatedDate,
@@ -61,11 +61,10 @@ namespace BuildCleanArchitecture.Application.Books.Dtos
                         UpdatedBy = entity.UpdatedBy
                     };
                 });
-                CreateMap<BookDto, Book>();
-                CreateMap<BookUpdateDto, Book>();
-                CreateMap<BookAddDto, Book>();
+                CreateMap<CatalogBookDto, CatalogBook>();
+                CreateMap<CatalogBookUpdateDto, CatalogBook>();
+                CreateMap<CatalogBookAddDto, CatalogBook>();
             }
         }
-
     }
 }

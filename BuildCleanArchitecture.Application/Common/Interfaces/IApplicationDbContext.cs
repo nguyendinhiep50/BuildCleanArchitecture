@@ -1,5 +1,4 @@
-﻿using BuildCleanArchitecture.Domain.Enities;
-using BuildCleanArchitecture.Domain.Entities;
+﻿using BuildCleanArchitecture.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BuildCleanArchitecture.Application.Common.Interfaces

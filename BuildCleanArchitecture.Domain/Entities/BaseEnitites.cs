@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BuildCleanArchitecture.Domain.Entities
+﻿namespace BuildCleanArchitecture.Domain.Entities
 {
     public class BaseEnitites
     {

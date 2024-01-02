@@ -34,11 +34,10 @@ namespace BuildCleanArchitecture.Application.Books.Queries
 
             if (!string.IsNullOrEmpty(searchText))
             {
-                query = query.Where(x => EF.Functions.Like(x.Name!, "%" + searchText + "%")
-                                        );
+                query = query.Where(x => EF.Functions.Like(x.Name!, "%" + searchText + "%"));
             }
 
-            query = query.Include(x => x.AuthorBooks);
+            query = query.Include(x => x.AuthorBook);
 
             return await query.ToPagingAsync<Book, BookDto>(filter!, _mapper);
         }

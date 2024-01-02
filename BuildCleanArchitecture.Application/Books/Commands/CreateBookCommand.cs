@@ -32,12 +32,12 @@ namespace BuildCleanArchitecture.Application.Books.Commands
         {
             var book = _mapper.Map<Book>(request.Dto!);
 
-            var existedAccount0Code = await _mediator.Send(new CheckBookCodeExistedQuery
+            var existedBookCode = await _mediator.Send(new CheckBookCodeExistedQuery
             {
                 Id = book.Id!
             });
 
-            if (existedAccount0Code)
+            if (existedBookCode)
             {
                 return new ResponseModel<bool>
                 {

@@ -1,10 +1,10 @@
-﻿using BuildCleanArchitecture.Application.Common.Exceptions;
-using BuildCleanArchitecture.Application.Common.Interfaces;
-using BuildCleanArchitecture.Application.Common.Security;
-using MediatR;
-using System.Reflection;
+﻿//using BuildCleanArchitecture.Application.Common.Exceptions;
+//using BuildCleanArchitecture.Application.Common.Interfaces;
+//using BuildCleanArchitecture.Application.Common.Security;
+//using MediatR;
+//using System.Reflection;
 
-namespace BuildCleanArchitecture.Application.Common.Behaviours;
+//namespace BuildCleanArchitecture.Application.Common.Behaviours;
 
 //public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 //{

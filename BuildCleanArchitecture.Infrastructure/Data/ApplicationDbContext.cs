@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using BuildCleanArchitecture.Application.Common.Interfaces;
 using BuildCleanArchitecture.Domain.Entities;
-using BuildCleanArchitecture.Domain.Enities;
 using BuildCleanArchitecture.Infrastructure.Configurations;
 using System.Reflection;
 

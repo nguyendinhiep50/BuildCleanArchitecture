@@ -1,7 +1,6 @@
-﻿using BuildCleanArchitecture.Domain.Entities;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace BuildCleanArchitecture.Domain.Enities
+namespace BuildCleanArchitecture.Domain.Entities
 {
     public class CatalogBook : BaseEnitites
     {

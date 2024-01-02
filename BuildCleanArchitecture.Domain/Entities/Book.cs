@@ -1,5 +1,4 @@
-﻿using BuildCleanArchitecture.Domain.Enities;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BuildCleanArchitecture.Domain.Entities
 {
@@ -12,8 +11,8 @@ namespace BuildCleanArchitecture.Domain.Entities
 
         public DateTime? PublicationDate { get; set; }
 
-        public virtual AuthorBook AuthorBooks { get; set; } = null!;
+        public virtual AuthorBook AuthorBook { get; set; } = null!;
 
-        public virtual ICollection<CatalogBook> CatalogBooks { get; set; } = new List<CatalogBook>();
+        public virtual CatalogBook CatalogBook { get; set; } = null!;
     }
 }

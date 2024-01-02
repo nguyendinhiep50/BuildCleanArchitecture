@@ -10,29 +10,29 @@ namespace BuildCleanArchitecture.Application.Books.Commands
         public string Id { get; set; } = null!;
     }
 
-    internal class DeleteAccount0CommandHandler : IRequestHandler<DeleteBookCommand, ResponseModel<bool>>
+    internal class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand, ResponseModel<bool>>
     {
         private readonly IApplicationDbContext _context;
 
-        public DeleteAccount0CommandHandler(IApplicationDbContext context)
+        public DeleteBookCommandHandler(IApplicationDbContext context)
         {
             _context = context;
         }
 
         public async Task<ResponseModel<bool>> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
         {
-            var account0 = await _context.Books.FirstOrDefaultAsync(x => x.Id == request.Id);
+            var book = await _context.Books.AsTracking().FirstOrDefaultAsync(x => x.Id == request.Id);
 
-            if (account0 == null)
+            if (book == null)
             {
                 return new ResponseModel<bool>
                 {
                     IsSuccess = false,
-                    Message = $"Sách với mã  {request.Id} không tồn tại"
+                    Message = $"Sách với mã {request.Id} không tồn tại"
                 };
             }
 
-            account0.Status = false;
+            book.Status = false;
 
             await _context.SaveChangesAsync(cancellationToken);
 
