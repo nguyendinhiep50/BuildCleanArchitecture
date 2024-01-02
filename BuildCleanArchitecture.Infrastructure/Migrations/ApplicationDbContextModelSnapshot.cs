@@ -22,48 +22,6 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BuildCleanArchitecture.Domain.Enities.CatalogBook", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("BookId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<decimal?>("CreatedBy")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedSpanTime")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("UId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal?>("UpdatedBy")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedSpanTime")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("CatalogBooks");
-                });
-
             modelBuilder.Entity("BuildCleanArchitecture.Domain.Entities.AuthorBook", b =>
                 {
                     b.Property<string>("Id")
@@ -109,8 +67,11 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("AuthorBooksId")
+                    b.Property<string>("AuthorBookId")
                         .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CatalogBookId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal?>("CreatedBy")
@@ -145,9 +106,48 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorBooksId");
+                    b.HasIndex("AuthorBookId");
+
+                    b.HasIndex("CatalogBookId");
 
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("BuildCleanArchitecture.Domain.Entities.CatalogBook", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal?>("CreatedBy")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedSpanTime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("UId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("UpdatedBy")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedSpanTime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CatalogBooks");
                 });
 
             modelBuilder.Entity("BuildCleanArchitecture.Infrastructure.Identity.ApplicationRole", b =>
@@ -260,7 +260,7 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                         {
                             Id = new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6f445237-91c2-41dd-8fef-2d5c59ccc5b4",
+                            ConcurrencyStamp = "692d4ddb-f3b0-43fb-aeaf-f9786371c820",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
@@ -268,7 +268,7 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                             Name = "System",
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAED9RGetj8ZfBz/gDDZ/nWbPWiKDKi5wE+ScsobPe7PciQjuDYcKMdZX7fFfSiCLIyg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOnuaqKTFq9fqg1poQJfDEX7O6ctDL9XpqlyH5VYW/39TunqwOo2oJXgGkDJVtXCMQ==",
                             PhoneNumberConfirmed = false,
                             Status = true,
                             TwoFactorEnabled = false,
@@ -278,7 +278,7 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                         {
                             Id = new Guid("9e224968-33e4-4652-b7b7-8574d048cdb9"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5f3f8966-52e6-4817-93a0-c2ebffa49af2",
+                            ConcurrencyStamp = "9d6ad73a-db4f-4123-bed7-45594704fc26",
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "user@localhost.com",
                             EmailConfirmed = true,
@@ -286,7 +286,7 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                             Name = "User",
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIhKpSKxC0HMrvmGsyTrpeVSNsYAyKFb2mnSwKbY1SyuoflRiVqgkXdJCC91ZN5QLg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKD9XNQjLjz4UWLuPEX73bBnqOOIvLf8Bl8NXi4ZVQGSwc+4BnjUOuZtvAA6/AYpmw==",
                             PhoneNumberConfirmed = false,
                             Status = true,
                             TwoFactorEnabled = false,
@@ -321,22 +321,21 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BuildCleanArchitecture.Domain.Enities.CatalogBook", b =>
-                {
-                    b.HasOne("BuildCleanArchitecture.Domain.Entities.Book", null)
-                        .WithMany("CatalogBooks")
-                        .HasForeignKey("BookId");
-                });
-
             modelBuilder.Entity("BuildCleanArchitecture.Domain.Entities.Book", b =>
                 {
-                    b.HasOne("BuildCleanArchitecture.Domain.Entities.AuthorBook", "AuthorBooks")
+                    b.HasOne("BuildCleanArchitecture.Domain.Entities.AuthorBook", "AuthorBook")
                         .WithMany()
-                        .HasForeignKey("AuthorBooksId")
+                        .HasForeignKey("AuthorBookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AuthorBooks");
+                    b.HasOne("BuildCleanArchitecture.Domain.Entities.CatalogBook", "CatalogBook")
+                        .WithMany()
+                        .HasForeignKey("CatalogBookId");
+
+                    b.Navigation("AuthorBook");
+
+                    b.Navigation("CatalogBook");
                 });
 
             modelBuilder.Entity("BuildCleanArchitecture.Infrastructure.Identity.ApplicationUserRole", b =>
@@ -356,11 +355,6 @@ namespace BuildCleanArchitecture.Infrastructure.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("BuildCleanArchitecture.Domain.Entities.Book", b =>
-                {
-                    b.Navigation("CatalogBooks");
                 });
 
             modelBuilder.Entity("BuildCleanArchitecture.Infrastructure.Identity.ApplicationRole", b =>

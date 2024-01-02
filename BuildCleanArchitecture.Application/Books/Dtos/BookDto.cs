@@ -49,7 +49,7 @@ namespace BuildCleanArchitecture.Application.Books.Dtos
                     return new BookDto
                     {
                         Name = entity.Name,
-                        AuthorBooks = entity.AuthorBooks,
+                        AuthorBooks = entity.AuthorBook,
                         PublicationDate = entity.PublicationDate,
                         UId = entity.UId,
 

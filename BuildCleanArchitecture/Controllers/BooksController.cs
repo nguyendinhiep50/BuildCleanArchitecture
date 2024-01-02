@@ -13,9 +13,9 @@ namespace BuildCleanArchitecture.Controllers
     public class BooksController : ApiControllerBase
     {
         [HttpGet]
-        public Task<PaginatedList<BookDto>> Get([FromQuery] CatalogBookPagingFilterDto filter)
+        public Task<PaginatedList<BookDto>> Get([FromQuery] BookPagingFilterDto filter)
         {
-            return Mediator.Send(new GetCatalogBooksQuery
+            return Mediator.Send(new GetBooksQuery
             {
                 Filter = filter
             });
