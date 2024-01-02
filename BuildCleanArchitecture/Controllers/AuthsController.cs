@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BuildCleanArchitecture.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("2.0")]
+    [Route("/api/v{version:apiVersion}/[controller]")]
     [Authorize]
     public class AuthsController : ApiControllerBase
     {

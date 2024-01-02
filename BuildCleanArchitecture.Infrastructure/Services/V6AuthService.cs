@@ -27,7 +27,7 @@ namespace BuildCleanArchitecture.Infrastructure.Services
 
         public async Task<UserLoginResponse> LoginAsync(LoginRequest args)
         {
-            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName!.ToUpper() == args.UserName.ToUpper());
+            var user = await _userManager.Users.Include(x=>x.UserRoles).ThenInclude(y=>y.Role).FirstOrDefaultAsync(x => x.UserName!.ToUpper() == args.UserName.ToUpper());
 
             if (user != null)
             {
