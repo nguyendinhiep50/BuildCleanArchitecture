@@ -17,7 +17,7 @@ var configuration = builder.Configuration;
 services.AddApplicationServices();
 services.AddInfrastructureServices(configuration);
 services.AddWebServices();
-//
+
 services.AddCors(options =>
 {
     options.AddPolicy("AllowMyOrigin",
